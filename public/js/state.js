@@ -33,3 +33,4 @@ const optionIds = [
 
 let linesMarker = null;
 let neighboursMarkers = [];
+let boundsActive = true;

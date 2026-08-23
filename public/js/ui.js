@@ -171,6 +171,25 @@ function showEndScreen() {
   overlay.style.display = "flex";
   document.getElementById("options").style.display = "none";
 
+  document.getElementById("revealClues").addEventListener("click", () => {
+    // affichage des indices
+    changeLinesState(0);
+    changeStreetsNamesState(0);
+    changeNeighboursState(0);
+
+    // désactivation des bordures et limites de zoom
+    setEndBounds();
+
+    // masquage des marqueurs de station
+    removeNeighboursMarkers();
+
+    // reveal de la station sur la carte
+    showStation();
+    
+    // fermeture écran de fin
+    overlay.style.display = "none";
+  });
+
   document.getElementById("closeEndDisplay").addEventListener("click", () => {
     overlay.style.display = "none";
   });
