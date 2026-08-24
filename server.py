@@ -6,8 +6,8 @@ sont rejouables via un parametre date ; les jours futurs sont toujours refuses.
 Bibliotheque standard uniquement.
 """
 
-import json
 import gzip
+import json
 import math
 import os
 import random
@@ -49,7 +49,7 @@ _DAILY_ORDER = list(range(len(STATIONS)))
 random.Random(DAILY_SEED).shuffle(_DAILY_ORDER)
 
 
-def normalize(name):
+def normalize(name: str):
     s = unicodedata.normalize("NFKD", name).encode("ascii", "ignore").decode()
     return "".join(c for c in s.lower() if c.isalnum())
 

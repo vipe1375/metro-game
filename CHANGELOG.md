@@ -5,6 +5,7 @@
 - affichage du tracé des lignes passant par la station quand on révèle les lignes
 - `data/lines_clean.json` : tracé des lignes dans un rayon de 17km autour du centre de Paris
 - bouton "Révéler" pour afficher tous les indices à la fin de la partie
+- bouton "Partager" pour partager son score
 ### Modifié
 - alignement des marqueurs des stations voisines: désormais c'est l'icône de la ligne qui indique la station et non le milieu du texte
 - désactivation des contraintes de la carte à la fin de la partie
