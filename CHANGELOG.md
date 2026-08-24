@@ -1,6 +1,6 @@
 # Changelog
 
-# À venir
+# V1.1.0
 ### Ajouté
 - affichage du tracé des lignes passant par la station quand on révèle les lignes
 - `data/lines_clean.json` : tracé des lignes dans un rayon de 17km autour du centre de Paris
