@@ -20,6 +20,7 @@ let map = null;
 let endGame = false;
 let points = 100;
 let answer = null;
+let linesData = null;
 
 const maxSuggestions = 5;
 
@@ -32,3 +33,12 @@ const optionIds = [
 
 let linesMarker = null;
 let neighboursMarkers = [];
+let boundsActive = true;
+
+const levels = {
+  1: ["Très facile", "#2E8FFF"],   // bleu
+  2: ["Facile", "#3BB143"],        // vert
+  3: ["Moyen", "#F5C518"],         // jaune
+  4: ["Difficile", "#FF8C00"],     // orange
+  5: ["Très difficile", "#E03131"] // rouge
+};

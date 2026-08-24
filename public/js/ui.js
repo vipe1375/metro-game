@@ -115,13 +115,6 @@ function updatePoints(malus) {
 }
 
 function setDifficultyText() {
-  const levels = {
-    1: ["Très facile", "#2E8FFF"],   // bleu
-    2: ["Facile", "#3BB143"],        // vert
-    3: ["Moyen", "#F5C518"],         // jaune
-    4: ["Difficile", "#FF8C00"],     // orange
-    5: ["Très difficile", "#E03131"] // rouge
-  };
   const [text, color] = levels[difficulty];
   document.getElementById("difficultyText").textContent = text;
   document.getElementById("difficultyDot").style.background = color;
@@ -171,9 +164,46 @@ function showEndScreen() {
   overlay.style.display = "flex";
   document.getElementById("options").style.display = "none";
 
+  document.getElementById("revealClues").addEventListener("click", () => {
+    // affichage des indices
+    changeLinesState(0);
+    changeStreetsNamesState(0);
+    changeNeighboursState(0);
+
+    // désactivation des bordures et limites de zoom
+    setEndBounds();
+
+    // masquage des marqueurs de station
+    removeNeighboursMarkers();
+
+    // reveal de la station sur la carte
+    showStation();
+    
+    // fermeture écran de fin
+    overlay.style.display = "none";
+  });
+
   document.getElementById("closeEndDisplay").addEventListener("click", () => {
     overlay.style.display = "none";
   });
+
+  document.getElementById("shareButton").addEventListener("click", share)
+}
+
+function share() {
+  const [difficultyText, color] = levels[difficulty];
+  const difficultyIcons = ["🔵", "🟢", "🟡", "🟠", "🔴"];
+  var text = `Terminus du ${dailyDate}: \n Difficulté : ${difficultyIcons[difficulty-1]} ${difficultyText} \n`
+  
+  text = text + `Points : ${points}/100 \n`;
+  text = text + "🟥".repeat(guesses.length - 1) + "🟩";
+
+  text = text + "\n \n Tente ta chance sur https://terminus-game.fr !"
+
+  navigator.clipboard.writeText(text);
+
+  // mise jour du bouton
+  document.getElementById("shareButton").textContent = "Copié !";
 }
 
 function renderStreak() {

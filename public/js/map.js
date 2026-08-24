@@ -43,7 +43,7 @@ function initMap() {
   // Empêche de s'éloigner de plus de maxRadius de la station.
   let correcting = false;
   map.on("move", () => {
-    if (correcting) return;
+    if (!boundsActive || correcting) return;
     const c = map.getCenter();
     const dist = distanceMeters(lat, lon, c.lat, c.lng);
     if (dist > maxRadius) {
@@ -55,31 +55,6 @@ function initMap() {
       correcting = false;
     }
   });
-  
-  // map.on("move", () => {
-  //   if (correcting) return;
-  //   const c = map.getCenter();
-  //   const dist = distanceMeters(lat, lon, c.lat, c.lng);
-  
-  //   // rayon visible approximatif (demi-diagonale de la vue, en mètres)
-  //   const bounds = map.getBounds();
-  //   const viewReach = distanceMeters(
-  //     c.lat, c.lng,
-  //     bounds.getNorth(), bounds.getEast()
-  //   );
-  
-  //   // le centre ne peut pas s'approcher du bord à moins de viewReach
-  //   const allowed = Math.max(0, maxRadius - viewReach);
-  //   if (dist > allowed) {
-  //     correcting = true;
-  //     const ratio = allowed / dist;
-  //     map.setCenter([
-  //       lon + (c.lng - lon) * ratio,
-  //       lat + (c.lat - lat) * ratio,
-  //     ]);
-  //     correcting = false;
-  //   }
-  // });
 
   document.getElementById("mapCornerBtn").addEventListener("click", function () {
     map.rotateTo(0);
@@ -111,38 +86,57 @@ function initMap() {
 
       const bbox = turf.bbox(circle); // [ouest, sud, est, nord]
       map.setMaxBounds([[bbox[0], bbox[1]], [bbox[2], bbox[3]]]);
-
-      // DEBUG
-      // // Add the circle as a GeoJSON source
-      // map.addSource('location-radius', {
-      //     type: 'geojson',
-      //     data: circle
-      // });
-    
-      // // Add a fill layer with some transparency
-      // map.addLayer({
-      //     id: 'location-radius',
-      //     type: 'fill',
-      //     source: 'location-radius',
-      //     paint: {
-      //         'fill-color': '#8CCFFF',
-      //         'fill-opacity': 0.5
-      //     }
-      // });
-    
-      // // Add a line layer to draw the circle outline
-      // map.addLayer({
-      //     id: 'location-radius-outline',
-      //     type: 'line',
-      //     source: 'location-radius',
-      //     paint: {
-      //         'line-color': '#0094ff',
-      //         'line-width': 3
-      //     }
-      // });
-      // DEBUG
     });
   });
+}
+
+function setEndBounds() {
+  map.setMinZoom(0);
+  const endRadius = 25; // kilometers
+  const options = {
+      steps: 64,
+      units: 'kilometers'
+  };
+  const circle = turf.circle([currentStation.lon, currentStation.lat], endRadius, options);
+
+  const bbox = turf.bbox(circle); // [ouest, sud, est, nord]
+  map.setMaxBounds([[bbox[0], bbox[1]], [bbox[2], bbox[3]]]);
+
+  boundsActive = false;
+}
+
+// MARQUEURS
+function badgeEl(line) {
+  const b = document.createElement("span");
+  b.className = "badge";
+  b.textContent = line.short;
+  b.style.background = line.color;
+  b.style.color = line.text;
+  b.title = line.long;
+  return b;
+}
+
+function badgesEl(lines) {
+  const wrap = document.createElement("span");
+  wrap.className = "badges";
+  lines.forEach((l) => wrap.appendChild(badgeEl(l)));
+  return wrap;
+}
+
+function stationEl(lines, name) {
+  const el = document.createElement("div");        // laissé nu pour MapLibre
+
+  const inner = document.createElement("div");
+  inner.className = "station-marker";
+  inner.appendChild(badgesEl(lines));
+
+  const label = document.createElement("span");
+  label.textContent = name;
+  label.className = "station-label";
+  inner.appendChild(label);
+
+  el.appendChild(inner);
+  return el;
 }
 
 function makeMarker(lat, lon, el) {
@@ -152,6 +146,7 @@ function makeMarker(lat, lon, el) {
     .addTo(map);
 }
 
+// INDICES
 function changeStreetsNamesState(malus) {
   labelLayerIds.forEach((id) =>
     map.setLayoutProperty(id, "visibility", "visible")
@@ -160,27 +155,16 @@ function changeStreetsNamesState(malus) {
 }
 
 function changeNeighboursState(malus) {
-  neighboursMarkers.forEach((m) => m.remove());
-  neighboursMarkers = [];
+  removeNeighboursMarkers();
 
   dailyNeighbours.forEach((n) => {
     if (!n.lines || !n.lines.length) return;
     if (n.lon == currentStation.lon && n.lat == currentStation.lat) return;
 
-    const el = document.createElement("div");
-    el.style.display = "flex";
-    el.style.alignItems = "center";
-    el.style.whiteSpace = "nowrap";
-    el.appendChild(badgesEl(n.lines));
-
-    const label = document.createElement("span");
-    label.textContent = n.name;
-    label.style.marginLeft = "4px";
-    label.className = "station-label";
-    el.appendChild(label);
-
-    neighboursMarkers.push(makeMarker(n.lat, n.lon, el));
+    neighboursMarkers.push(makeMarker(n.lat, n.lon, stationEl(n.lines, n.name)));
   });
+
+  // showLines(Object.values(linesData).filter((s)=> s.type == "Subway"));
 
   updatePoints(malus);
 }
@@ -197,22 +181,49 @@ function changeLinesState(malus) {
   el.appendChild(badgesEl(currentStation.lines));
   linesMarker = makeMarker(currentStation.lat, currentStation.lon, el);
 
+  // affichage des tracés
+  const shapes = currentStation.lines
+    .map((l) => linesData[l.short])
+    .filter(Boolean)
+  //.map((s) => ({ ...s, shape: clip(s.shape, [currentStation.lon, currentStation.lat], 0.2) }));
+  showLines(shapes);
+
   updatePoints(malus);
 }
 
-function badgeEl(line) {
-  const b = document.createElement("span");
-  b.className = "badge";
-  b.textContent = line.short;
-  b.style.background = line.color;
-  b.style.color = line.text;
-  b.title = line.long;
-  return b;
+// AUTRES
+function removeNeighboursMarkers() {
+  neighboursMarkers.forEach((m) => m.remove());
+  neighboursMarkers = [];
 }
 
-function badgesEl(lines) {
-  const wrap = document.createElement("span");
-  wrap.className = "badges";
-  lines.forEach((l) => wrap.appendChild(badgeEl(l)));
-  return wrap;
+function showStation() {
+  if (linesMarker) linesMarker.remove();
+  linesMarker = makeMarker(
+    currentStation.lat,
+    currentStation.lon,
+    stationEl(currentStation.lines, currentStation.name)
+  );
+}
+
+function showLines(shapes) {
+  // shapes : liste de { color, shape } (entrées de linesData)
+  const features = shapes.map((s) => ({
+    ...s.shape,
+    properties: { color: "#" + s.color },
+  }));
+  const data = { type: "FeatureCollection", features };
+
+  if (map.getSource("lines")) {
+    map.getSource("lines").setData(data);
+  } else {
+    map.addSource("lines", { type: "geojson", data });
+    map.addLayer({
+      id: "lines",
+      type: "line",
+      source: "lines",
+      layout: { "line-join": "round", "line-cap": "round" },
+      paint: { "line-color": ["get", "color"], "line-width": 4 },
+    });
+  }
 }
