@@ -58,9 +58,7 @@ function useOnce(button, action, malus) {
 
 async function main() {
   
-  document.getElementById("endOverlay").style.display = "none";
-  initTutorial();
-
+  // CHARGEMENT DES DONNEES
   const daily = await loadDaily();
   isArchive = daily.archive;
   dailyDate = daily.date;
@@ -69,20 +67,18 @@ async function main() {
   maxRadius = daily.radiusMeters;
   difficulty = daily.difficulty;
   costs = daily.points;
-
+  
+  const saved = loadProgress(dailyDate);
   await loadStationNames();
   await loadLines();
   
+  // ÉLÉMENTS DE L'ÉCRAN
   await initMap();
-  
-  const saved = loadProgress(dailyDate);
-  
   if (saved) {
     guesses.push(...(saved.guesses || []));
     endGame = !!saved.endGame;
     if (saved.revealedName) {
       currentStation.name = saved.revealedName;
-      // TODO : écran de fin
     }
     points = saved.points;
     if (endGame) document.getElementById("guessForm").style.display = "none";
@@ -93,14 +89,27 @@ async function main() {
       actionsByOptionId[id](0);
     });
   }
-
   if (isArchive) {
     renderArchiveSubHeader(daily.date);
   }
   else {
     renderStreak();
   }
-  
+  if (endGame) {
+    console.log("bababa")
+    showEndScreen();
+  }
+  renderAttempts();
+  updatePoints(0);
+  setDifficultyText();
+  showTutorial();
+
+  document.getElementById("streetsPoints").textContent = `-${costs.streets}`;
+  document.getElementById("linesPoints").textContent = `-${costs.lines}`;
+  document.getElementById("neighboursPoints").textContent = `-${costs.neighbours}`;
+  document.getElementById("guessButton").textContent = `OK (-${costs.attempts})`;
+
+  // INDICES ET TENTATIVES
   autocomplete(document.getElementById("guess"), stationsNames);
 
   document.getElementById("guessForm").addEventListener("submit", function (e) {
@@ -108,18 +117,9 @@ async function main() {
     guess();
   });
 
-  renderAttempts();
-  updatePoints(0);
-  setDifficultyText();
-
   useOnce(document.getElementById("streetsNamesOption"), changeStreetsNamesState, costs.streets);
   useOnce(document.getElementById("linesOption"), changeLinesState, costs.lines);
   useOnce(document.getElementById("neighboursOption"), changeNeighboursState, costs.neighbours);
-
-  document.getElementById("streetsPoints").textContent = `-${costs.streets}`;
-  document.getElementById("linesPoints").textContent = `-${costs.lines}`;
-  document.getElementById("neighboursPoints").textContent = `-${costs.neighbours}`;
-  document.getElementById("guessButton").textContent = `OK (-${costs.attempts})`;
 }
 
 main();
