@@ -120,11 +120,10 @@ function setDifficultyText() {
   document.getElementById("difficultyDot").style.background = color;
 }
 
-function initTutorial() {
+function showTutorial() {
   const overlay = document.getElementById("tutorialOverlay");
-  if (localStorage.getItem("tutorialSeen")) {
-    overlay.style.display = "none";
-    return;
+  if (!localStorage.getItem("tutorialSeen")) {
+    overlay.style.display = "flex";
   }
   document.getElementById("tutorialClose").addEventListener("click", () => {
     overlay.style.display = "none";
