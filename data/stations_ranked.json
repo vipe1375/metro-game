@@ -253,7 +253,7 @@
       },
       {
         "mode": "TRAM",
-        "short": "3A",
+        "short": "T3A",
         "long": "Tram 3A",
         "color": "#EB6909",
         "text": "#fff"
@@ -315,7 +315,7 @@
       },
       {
         "mode": "TRAM",
-        "short": "1",
+        "short": "T1",
         "long": "Tram 1",
         "color": "#004494",
         "text": "#fff"
@@ -501,7 +501,7 @@
       },
       {
         "mode": "TRAM",
-        "short": "1",
+        "short": "T1",
         "long": "Tram 1",
         "color": "#004494",
         "text": "#fff"
@@ -1154,7 +1154,7 @@
       },
       {
         "mode": "TRAM",
-        "short": "6",
+        "short": "T6",
         "long": "Tram 6",
         "color": "#E2231A",
         "text": "#fff"
@@ -2457,7 +2457,7 @@
       },
       {
         "mode": "TRAM",
-        "short": "1",
+        "short": "T1",
         "long": "Tram 1",
         "color": "#004494",
         "text": "#fff"
@@ -2524,7 +2524,7 @@
       },
       {
         "mode": "TRAM",
-        "short": "2",
+        "short": "T2",
         "long": "Tram 2",
         "color": "#C6017E",
         "text": "#fff"
@@ -2721,7 +2721,7 @@
       },
       {
         "mode": "TRAM",
-        "short": "1",
+        "short": "T1",
         "long": "Tram 1",
         "color": "#004494",
         "text": "#fff"
@@ -3558,7 +3558,7 @@
       },
       {
         "mode": "TRAM",
-        "short": "3B",
+        "short": "T3B",
         "long": "Tram 3B",
         "color": "#009A93",
         "text": "#fff"
@@ -4175,7 +4175,7 @@
       },
       {
         "mode": "TRAM",
-        "short": "3A",
+        "short": "T3A",
         "long": "Tram 3A",
         "color": "#EB6909",
         "text": "#fff"
@@ -4198,7 +4198,7 @@
       },
       {
         "mode": "TRAM",
-        "short": "3A",
+        "short": "T3A",
         "long": "Tram 3A",
         "color": "#EB6909",
         "text": "#fff"
@@ -4221,7 +4221,7 @@
       },
       {
         "mode": "TRAM",
-        "short": "3A",
+        "short": "T3A",
         "long": "Tram 3A",
         "color": "#EB6909",
         "text": "#fff"
@@ -4260,7 +4260,7 @@
       },
       {
         "mode": "TRAM",
-        "short": "3B",
+        "short": "T3B",
         "long": "Tram 3B",
         "color": "#009A93",
         "text": "#fff"
@@ -4283,7 +4283,7 @@
       },
       {
         "mode": "TRAM",
-        "short": "3B",
+        "short": "T3B",
         "long": "Tram 3B",
         "color": "#009A93",
         "text": "#fff"
@@ -4306,7 +4306,7 @@
       },
       {
         "mode": "TRAM",
-        "short": "3A",
+        "short": "T3A",
         "long": "Tram 3A",
         "color": "#EB6909",
         "text": "#fff"
@@ -4329,14 +4329,14 @@
       },
       {
         "mode": "TRAM",
-        "short": "3A",
+        "short": "T3A",
         "long": "Tram 3A",
         "color": "#EB6909",
         "text": "#fff"
       },
       {
         "mode": "TRAM",
-        "short": "9",
+        "short": "T9",
         "long": "Tram 9",
         "color": "#F59C00",
         "text": "#000"
@@ -4373,7 +4373,7 @@
       },
       {
         "mode": "TRAM",
-        "short": "3B",
+        "short": "T3B",
         "long": "Tram 3B",
         "color": "#009A93",
         "text": "#fff"
@@ -4396,7 +4396,7 @@
       },
       {
         "mode": "TRAM",
-        "short": "3B",
+        "short": "T3B",
         "long": "Tram 3B",
         "color": "#009A93",
         "text": "#fff"
@@ -4419,7 +4419,7 @@
       },
       {
         "mode": "TRAM",
-        "short": "3B",
+        "short": "T3B",
         "long": "Tram 3B",
         "color": "#009A93",
         "text": "#fff"
@@ -4442,7 +4442,7 @@
       },
       {
         "mode": "TRAM",
-        "short": "3B",
+        "short": "T3B",
         "long": "Tram 3B",
         "color": "#009A93",
         "text": "#fff"
@@ -4465,7 +4465,7 @@
       },
       {
         "mode": "TRAM",
-        "short": "3B",
+        "short": "T3B",
         "long": "Tram 3B",
         "color": "#009A93",
         "text": "#fff"
@@ -4488,7 +4488,7 @@
       },
       {
         "mode": "TRAM",
-        "short": "3B",
+        "short": "T3B",
         "long": "Tram 3B",
         "color": "#009A93",
         "text": "#fff"
@@ -4527,7 +4527,7 @@
       },
       {
         "mode": "TRAM",
-        "short": "3B",
+        "short": "T3B",
         "long": "Tram 3B",
         "color": "#009A93",
         "text": "#fff"
@@ -4550,7 +4550,7 @@
       },
       {
         "mode": "TRAM",
-        "short": "3A",
+        "short": "T3A",
         "long": "Tram 3A",
         "color": "#EB6909",
         "text": "#fff"
@@ -4573,7 +4573,7 @@
       },
       {
         "mode": "TRAM",
-        "short": "3A",
+        "short": "T3A",
         "long": "Tram 3A",
         "color": "#EB6909",
         "text": "#fff"
@@ -4596,14 +4596,14 @@
       },
       {
         "mode": "TRAM",
-        "short": "3A",
+        "short": "T3A",
         "long": "Tram 3A",
         "color": "#EB6909",
         "text": "#fff"
       },
       {
         "mode": "TRAM",
-        "short": "3B",
+        "short": "T3B",
         "long": "Tram 3B",
         "color": "#009A93",
         "text": "#fff"
@@ -4633,7 +4633,7 @@
       },
       {
         "mode": "TRAM",
-        "short": "3B",
+        "short": "T3B",
         "long": "Tram 3B",
         "color": "#009A93",
         "text": "#fff"
@@ -4656,7 +4656,7 @@
       },
       {
         "mode": "TRAM",
-        "short": "3A",
+        "short": "T3A",
         "long": "Tram 3A",
         "color": "#EB6909",
         "text": "#fff"
@@ -5172,7 +5172,7 @@
       },
       {
         "mode": "TRAM",
-        "short": "8",
+        "short": "T8",
         "long": "Tram 8",
         "color": "#96BB1F",
         "text": "#000"
@@ -6004,7 +6004,7 @@
       },
       {
         "mode": "TRAM",
-        "short": "7",
+        "short": "T7",
         "long": "Tram 7",
         "color": "#6E1E78",
         "text": "#fff"

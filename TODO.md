@@ -4,6 +4,7 @@
 - bouton Abandonner
 - statistiques : afficher "mieux que x% des joueurs"
 - statistiques d'utilisation
+- noms des trams (T1 au lieu de 1)
 
 Stats:
 - nb de joueurs 
