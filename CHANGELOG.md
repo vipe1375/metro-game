@@ -1,12 +1,17 @@
 # Changelog
 
-# v1.1.1
+# v1.1.2
+### Corrigé
+- couleurs des lignes
+- noms des lignes de tram (T1 au lieu de 1, etc.)
+
+## v1.1.1
 ### Ajouté
 - ajout des balises opengraph
 ### Corrigé
 - ordre d'affichage des overlays de tutoriel et de fin
 
-# v1.1.0
+## v1.1.0
 ### Ajouté
 - affichage du tracé des lignes passant par la station quand on révèle les lignes
 - `data/lines_clean.json` : tracé des lignes dans un rayon de 17km autour du centre de Paris
@@ -16,13 +21,13 @@
 - alignement des marqueurs des stations voisines: désormais c'est l'icône de la ligne qui indique la station et non le milieu du texte
 - désactivation des contraintes de la carte à la fin de la partie
 
-# v1.0.3
+## v1.0.3
 ### Modifié
 - `TODO.md`
 ### Corrigé
 - affichage de la carte sur mobile
 
-# v1.0.2
+## v1.0.2
 ### Ajouté
 - sous-titre quand on joue une partie d'archives
 - points dans la liste des archives
